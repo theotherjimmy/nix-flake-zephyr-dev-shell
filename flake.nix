@@ -101,7 +101,6 @@
             sqlite = pkgs.sqlite.dev;
           };
           env = [
-            { name = "GNUARMEMB_TOOLCHAIN_PATH"; value = "${zephyr-sdk}/arm-zephyr-eabi"; }
             { name = "ZEPHYR_SDK_INSTALL_DIR"; value = "${zephyr-sdk}"; }
             { name = "PYTHONPATH"; eval = "${local-pythonpkgs}:$PYTHONPATH"; }
             # NOTE: I'm using the PIP_TARGET below to work around the fact
