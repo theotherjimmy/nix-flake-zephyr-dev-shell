@@ -69,6 +69,8 @@
               zephyr-sdk
               zephyr-cmake;
             inherit (pkgs)
+              tshark
+              binutils
               gcc-arm-embedded
               ninja
               gperf
@@ -97,6 +99,7 @@
               autoconf
               socat
               bridge-utils;
+            inherit (pkgs.stdenv) cc;
             openssl = pkgs.openssl.dev;
             sqlite = pkgs.sqlite.dev;
           };
