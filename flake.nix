@@ -44,7 +44,10 @@
               #twister deps
               ply
               pyserial
-              tabulate;
+              tabulate
+              # check copliance deps
+              junitparser
+              magic;
             # TODO: find a way to add this to the overlay
             imgtool = (p.callPackage ./nix/python-imgtool.nix { });
           });
@@ -69,6 +72,8 @@
               zephyr-sdk
               zephyr-cmake;
             inherit (pkgs)
+              gitlint
+              openssl
               tshark
               binutils
               gcc-arm-embedded

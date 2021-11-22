@@ -1,6 +1,6 @@
 { buildPythonPackage, fetchPypi, cbor, click, cryptography, intelhex }:
 let
-  version = "1.7.2";
+  version = "1.8.0";
   pname = "imgtool";
 in
 buildPythonPackage {
@@ -8,7 +8,7 @@ buildPythonPackage {
   doCheck = false;
   src = fetchPypi {
     inherit pname version;
-    sha256 = "0vpdks8fg7dsjjb48xj18r70i95snq4z6j3m2p28lf8yyvrq953r";
+    sha256 = "sha256-SFj1xfSM+koLuZ5g0AqikRcqfswq/k+3ftlhIfWbbi8=";
   };
   propagatedBuildInputs = [
     cbor
