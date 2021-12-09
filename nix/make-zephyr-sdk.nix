@@ -1,6 +1,6 @@
 { stdenv, fetchurl, which, python38, autoPatchelfHook }: arch: hash:
 let
-  version = "0.13.1";
+  version = "0.13.2";
 in
 stdenv.mkDerivation {
   name = "zephyr-sdk";

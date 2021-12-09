@@ -12,9 +12,9 @@
       mkZephyrShell = pkgs:
         let
           zephyr-sdk-arm = pkgs.makeZephyrSdk
-            "arm" "sha256-YCNDVTGrhn+PwWplaLpLNRQ+rPWGi0VhVQttwFWhn9Y=";
+            "arm" "sha256-D4CI4hgipnJwy9OPxurGA9PH0b7g0XhsygPrvlXOzFo=";
           zephyr-sdk-x64 = pkgs.makeZephyrSdk
-            "x86_64" "sha256-WtynxM2mpx/bn0Vh8qUMN8DzKsdI58D2PaR5Rbe73Ww=";
+            "x86_64" "sha256-8e9fhtnFA/03YOqbYa8do+JNzxfOYpeoVtA/XchJmoo=";
           zephyr-sdk = pkgs.symlinkJoin {
             name = "Zephyr-SDK";
             paths = [
@@ -22,7 +22,7 @@
               zephyr-sdk-x64
             ];
           };
-          python-packages = pkgs.python38.withPackages (p: builtins.attrValues {
+          python-packages = pkgs.python3.withPackages (p: builtins.attrValues {
             inherit (p)
               pyelftools
               pyyaml
@@ -39,6 +39,7 @@
               cbor
               jinja2
               # imgtool -- mcuboot's imagetool
+              pyocd
               pip
               pyusb
               #twister deps
@@ -72,6 +73,7 @@
               zephyr-sdk
               zephyr-cmake;
             inherit (pkgs)
+              uncrustify
               gitlint
               openssl
               tshark
@@ -81,6 +83,7 @@
               gperf
               ccache
               dtc
+              gnumake
               # For mcuboot development, we want both Rust and go.
               go
               pkgconfig
@@ -105,8 +108,9 @@
               socat
               bridge-utils;
             inherit (pkgs.stdenv) cc;
-            openssl = pkgs.openssl.dev;
-            sqlite = pkgs.sqlite.dev;
+            inherit (pkgs.unixtools) xxd;
+            openssl-dev = pkgs.openssl.dev;
+            sqlite-dev = pkgs.sqlite.dev;
           };
           env = [
             { name = "ZEPHYR_SDK_INSTALL_DIR"; value = "${zephyr-sdk}"; }
