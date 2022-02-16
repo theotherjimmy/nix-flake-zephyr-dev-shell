@@ -46,6 +46,7 @@
               ply
               pyserial
               tabulate
+              GitPython
               # check copliance deps
               junitparser
               magic;
@@ -67,6 +68,7 @@
             });
         in
         pkgs.devshell.mkShell {
+          motd = "";
           packages = builtins.attrValues {
             inherit
               python-packages
@@ -114,7 +116,7 @@
           };
           env = [
             { name = "ZEPHYR_SDK_INSTALL_DIR"; value = "${zephyr-sdk}"; }
-            { name = "PYTHONPATH"; eval = "${local-pythonpkgs}:${python-packages}/lib/python3.8/site-packages:$PYTHONPATH"; }
+            { name = "PYTHONPATH"; eval = "${python-packages}/lib/python3.9/site-packages:$PYTHONPATH"; }
             # NOTE: I'm using the PIP_TARGET below to work around the fact
             # that I can't install pyocd through nixpkgs at this time. Remove
             # this when I find a way to install pyocd through nixpkgs.
