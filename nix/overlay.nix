@@ -1,6 +1,7 @@
 final: prior: {
   jlink = final.callPackage ./jlink.nix { };
   makeZephyrSdk = final.callPackage ./make-zephyr-sdk.nix { };
+  fvpCorestone = final.callPackage ./make-fvp.nix { };
   python3 = prior.python3.override {
     packageOverrides = pyfinal: pyprior: {
       cmsis-pack-manager = pyfinal.callPackage ./python-cmsis-pack-manager.nix { };

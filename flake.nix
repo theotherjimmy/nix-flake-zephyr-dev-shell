@@ -104,6 +104,7 @@
             # this when I find a way to install pyocd through nixpkgs.
             { name = "PIP_TARGET"; value = local-pythonpkgs; }
             { name = "LD_LIBRARY_PATH"; eval = "${pkgs.libusb-compat-0_1}/lib:$LD_LIBRARY_PATH"; }
+            { name = "ARMFVP_BIN_PATH"; value = pkgs.fvpCorestone; }
           ];
         };
     in
