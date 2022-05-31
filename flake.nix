@@ -39,7 +39,6 @@
               cbor
               jinja2
               # imgtool -- mcuboot's imagetool
-              pyocd
               pip
               pyusb
               #twister deps
@@ -53,37 +52,23 @@
             # TODO: find a way to add this to the overlay
             imgtool = (p.callPackage ./nix/python-imgtool.nix { });
           });
-          zephyr-cmake = pkgs.cmake.overrideAttrs (old:
-            let
-              version = "3.21.2";
-            in
-            {
-              inherit version;
-              patches = [ ];
-              src = pkgs.fetchurl {
-                url = "https://cmake.org/files/v${pkgs.lib.versions.majorMinor version}/cmake-${version}.tar.gz";
-                # compare with https://cmake.org/files/v${lib.versions.majorMinor version}/cmake-${version}-SHA-256.txt
-                sha256 = "sha256-lCdeC2HIS7QnEPUyCiPG3LLG7gMq59KmFvU/aLPSFlk=";
-              };
-            });
         in
         pkgs.devshell.mkShell {
           motd = "";
           packages = builtins.attrValues {
             inherit
               python-packages
-              zephyr-sdk
-              zephyr-cmake;
+              zephyr-sdk;
             inherit (pkgs)
               uncrustify
               gitlint
               openssl
-              tshark
               binutils
               gcc-arm-embedded
               ninja
               gperf
               ccache
+              cmake
               dtc
               gnumake
               # For mcuboot development, we want both Rust and go.
@@ -93,10 +78,7 @@
               cargo
               cargo-deps
               # debug utilities
-              gdb-multitarget
-              openocd
-              libusb
-              libusb-compat-0_1
+              gdb
               # rust
               cargo-watch
               cargo-binutils
